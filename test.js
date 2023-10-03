@@ -1,4 +1,3 @@
-
 let result = document.querySelector('.calculator .result');
 let equal = document.querySelector('.calculator .buttons .equal');
 let clear = document.querySelector('.calculator .buttons .leftPanel :nth-child(4) :nth-child(3) ');
@@ -22,126 +21,46 @@ let point = document.querySelector('.calculator .buttons .leftPanel :nth-child(4
 
 
 
-// START SOLUTION
+// ONCLICK ALL BTN SHOW IN RESULT.TEXTCONTENT
 
+// Create array for all btn
+let allBtns = new Array(zero, one, two, three, four, five, sexe, seven, eight, nine, point, add, supp, mult, divs)
+// Loop for all btn in add event
+allBtns.forEach(function (btn) {
 
-// array all btn
-let numbersbtn = new Array(zero, one, two, three, four, five, sexe, seven, eight, nine, point)
-let operatbtn = new Array(add, supp, mult, divs)
-
-// event click for show btn in result
-numbersbtn.forEach(function (num) {
-    num.addEventListener('click', function () {
-
-        result.textContent += num.textContent
+    btn.addEventListener('click', function () {
+        result.textContent += btn.textContent
     })
 })
 
-operatbtn.forEach(function (opera) {
 
-    opera.addEventListener('click', function () {
 
-        result.textContent += opera.textContent
-    })
-})
+// FUNCTION TOTAL()
 
-// function calc the all operation
-function calacReslt() {
-
+function total() {
+  
+    // Collecte all btn in result.Content to ==> array
     let arrayResult = result.textContent.split(/([+-/*])/)
+    let total=arrayResult.join('')
+    result.textContent=Math.round(eval(total))
+   
+    
+}
 
-    // calcu divs
-    if (arrayResult.includes('/')) {
-
-        for (let i = 0; i < arrayResult.length; i++) {
-
-            if (arrayResult[i] === '/') {
-
-                let calcmult = parseInt(arrayResult[i - 1]) / parseInt(arrayResult[i + 1])
-                arrayResult.splice(i - 1, 3, calcmult)
-            }
-        }
-    }
-
-
-    // calcu mult
-    if (arrayResult.includes('*')) {
-
-        for (let i = 0; i < arrayResult.length; i++) {
-
-            if (arrayResult[i] === '*') {
-
-                let calcmult = parseInt(arrayResult[i - 1]) * parseInt(arrayResult[i + 1])
-                arrayResult.splice(i - 1, 3, calcmult)
-            }
-        }
-    }
-
-
-    // calcu add
-    if (arrayResult.includes('+')) {
-
-        for (let i = 0; i < arrayResult.length; i++) {
-
-            if (arrayResult[i] === '+') {
-
-               
-                let calcmult = parseInt(arrayResult[i - 1]) + parseInt(arrayResult[i + 1])
-                arrayResult.splice(i - 1, 3, calcmult)
-            }
-        }
-    }
-
-
-    // calcu supp
-    if (arrayResult.includes('-')) {
-
-        for (let i = 0; i < arrayResult.length; i++) {
-
-            if (arrayResult[i] === '-') {
-
-                if ( arrayResult[i - 1] === '') {
-
-                    arrayResult[i + 1] =  - arrayResult[i + 1] 
-                    arrayResult.splice(i - 1, 2)
-                } else {
-
-                    let calcmult = parseInt(arrayResult[i - 1]) - parseInt(arrayResult[i + 1])
-                    arrayResult.splice(i - 1, 3, calcmult)
-                }
-            }
-        }
-    }
-
-    result.textContent = arrayResult.join('')
-    console.log(arrayResult)
+function clearResult(){
+    result.textContent=''
 }
 
 
+// CALL FUNCTION TOTAL()
 
-
-
-
-// function clear result
-function clearResult() {
-    result.textContent = ''
-}
-
-// CALL ALL FUNCTION
-equal.addEventListener('click', function () {
-    calacReslt()
+equal.addEventListener('click',function(){
+    total()
 })
 
-clear.addEventListener('click', function () {
+
+// CALL FUNCTION CLEAR()
+
+clear.addEventListener('click',function(){
     clearResult()
 })
-
-
-let testsupp= ['-',"4"]
-
-if(testsupp[0].includes('-')&& typeof parseInt(testsupp[1])==='number'){
-    console.log('hamza')
-}
-
-
-if(testsupp.includes())
